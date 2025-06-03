@@ -14,10 +14,6 @@ export default function LoginForm() {
 
   const [error, setError] = useState("")
 
-  useEffect(()=>{
-    console.log('JWT_SECRET:', process.env.JWT_SECRET);
-  })
-
   async function login() {
 
     if(username === "" || password === ""){
@@ -36,7 +32,6 @@ export default function LoginForm() {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json()
-    console.log(data.ok)
     if(data.ok === 0){
       setError(data.status)
       return

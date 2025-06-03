@@ -3,10 +3,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { RowDataPacket } from "mysql2";
 
-const secret = process.env.JWT_SECRET;
-if (!secret) throw new Error('JWT_SECRET não definido');
-
 export async function POST(req: Request) {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('JWT_SECRET não definido');
   const { username, password } = await req.json();
 
   try {
