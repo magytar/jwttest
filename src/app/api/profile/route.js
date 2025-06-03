@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export async function GET() {
-  const token = cookies().get('token')?.value;
+  const token = (await cookies()).get('token')?.value;
 
   if (!token) return NextResponse.json({status: "token ausente !"});
 
@@ -13,8 +13,8 @@ export async function GET() {
     const { payload } = await jwtVerify(token, secret);
     const username = payload.username;
 
-    return NextResponse.json({profile:username})
+    return NextResponse.json({profile: username});
   } catch {
-    return NextResponse.json({status:"error"}) ;
+    return NextResponse.json({status: "error"});
   }
 }
