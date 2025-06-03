@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import "./login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
@@ -13,6 +13,10 @@ export default function LoginForm() {
   const router = useRouter();
 
   const [error, setError] = useState("")
+
+  useEffect(()=>{
+    console.log('JWT_SECRET:', process.env.JWT_SECRET);
+  })
 
   async function login() {
 
