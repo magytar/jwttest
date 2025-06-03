@@ -6,7 +6,7 @@ import { RowDataPacket } from 'mysql2';
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   const token = (await cookies()).get('token')?.value;
 
   if (!token) {
@@ -16,15 +16,18 @@ export async function GET() {
   try {
     const { payload } = await jwtVerify(token, secret);
     const username = payload.username;
+
     const [rows] = await db.query<RowDataPacket[]>(
-        "SELECT * FROM users WHERE user = ?", [username]
-    )
-    if(rows.length === 1){
-        return NextResponse.json({credits: rows[0].credit})
+      "SELECT credit FROM users WHERE user = ?",
+      [username]
+    );
+
+    if (rows.length === 0) {
+      return NextResponse.json({ error: 'Usuário não encontrado' }, { status: 404 });
     }
 
-    return NextResponse.json({profile:username})
+    return NextResponse.json({ credits: rows[0].credit });
   } catch {
-    return NextResponse.json({status:"error"}) ;
+    return NextResponse.json({ status: "error" }, { status: 403 });
   }
 }
