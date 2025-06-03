@@ -1,0 +1,21 @@
+.display-login {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+h2 {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+input  {
+    padding: 5px;
+}
+.status_login {
+    width: 100%;
+    background-color: rgba(83, 78, 78, 0.548);
+    padding: 5px;
+    border-radius: 5px;
+}
