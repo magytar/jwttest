@@ -9,7 +9,9 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 export async function GET() {
   const token = (await cookies()).get('token')?.value;
 
-  if (!token) return NextResponse.json({status: "token ausente !"});
+  if (!token) {
+    return NextResponse.json({ error: 'Token ausente' }, { status: 401 });
+  }
 
   try {
     const { payload } = await jwtVerify(token, secret);
