@@ -43,7 +43,7 @@ export default function LoginForm() {
       }, 2000);
     } else {
       // Login falhou, pega mensagem de erro e mostra no console (pode melhorar UI)
-      setError("Login falhou: " + data.status)
+      setError("Login falhou ->: " + data.status)
     }
   }
 
