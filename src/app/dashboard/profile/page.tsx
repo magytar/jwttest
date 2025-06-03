@@ -11,11 +11,6 @@ export default function Dashboard() {
     const [user, setUser] = useState("")
     const [credits, setCredits] = useState(0)
 
-    async function logout() {
-        await fetch('/api/logout', { method: 'POST' });
-        router.push('/login');
-    }
-
     useEffect(()=>{
 
         async function resprofile(){
@@ -33,8 +28,8 @@ export default function Dashboard() {
                 setCredits(data2.credits)
 
             }
-            catch{
-                console.log("error")
+            catch(error){
+                console.log("error", error)
             }
         }
         

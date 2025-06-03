@@ -18,12 +18,12 @@ export default function LoginForm() {
 
     if(username === "" || password === ""){
       setError("digite user e password !")
-      return null
+      return
     }
 
     if(username.length <= 4 || password.length <= 4){
       setError("digite um user ou password correto !")
-      return null
+      return
     }
     setError("Loading...")
     const res = await fetch("/api/login", {
@@ -35,7 +35,7 @@ export default function LoginForm() {
     console.log(data.ok)
     if(data.ok === 0){
       setError(data.status)
-      return null
+      return
     }
     if (res.ok) {
       setError("Connecting...")
